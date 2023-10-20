@@ -96,7 +96,8 @@ public class UserRepositoryOld {
         Optional<User> result = Optional.empty();
         try {
             session.beginTransaction();
-            result = Optional.ofNullable(session.get(User.class, userId));
+            result = session.createQuery("from user where id = :id", User.class)
+                    .setParameter("id", userId).uniqueResultOptional();
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -117,7 +118,7 @@ public class UserRepositoryOld {
         try {
             session.beginTransaction();
             result = session.createQuery("from user where login like :login", User.class)
-                            .setParameter("login", key).list();
+                    .setParameter("login", key).list();
             session.getTransaction().commit();
             return result;
         } catch (Exception e) {
