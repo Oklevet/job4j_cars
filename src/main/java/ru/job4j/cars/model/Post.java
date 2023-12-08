@@ -35,7 +35,6 @@ public class Post {
     @JoinColumn(name = "auto_post_id")
     private List<PriceHistory> priceHistory;
 
-
     @ManyToMany
     @JoinTable(
             name = "participate",
