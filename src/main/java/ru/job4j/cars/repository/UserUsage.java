@@ -12,7 +12,7 @@ public class UserUsage {
                 .configure().build();
         try (SessionFactory sf = new MetadataSources(registry)
                 .buildMetadata().buildSessionFactory()) {
-            var userRepository = new UserRepositoryOld(sf);
+        /*    var userRepository = new UserRepositoryOld(sf);
             var user = new User();
             user.setLogin("admin");
             user.setPassword("admin");
@@ -32,6 +32,8 @@ public class UserUsage {
             userRepository.delete(user.getId());
             userRepository.findAllOrderById()
                     .forEach(System.out::println);
+                    */
+
         } finally {
             StandardServiceRegistryBuilder.destroy(registry);
         }
