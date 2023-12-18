@@ -23,6 +23,12 @@ create table history(
     endAt timestamp
 );
 
+create table brand(
+    id serial primary key,
+    brand text not null,
+    model text not null
+);
+
 ALTER TABLE auto_post
     ADD COLUMN IF NOT EXISTS
     car_id int REFERENCES car(id);
