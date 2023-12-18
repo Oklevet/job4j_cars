@@ -6,8 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @Entity
@@ -31,5 +31,5 @@ public class Car {
             @JoinColumn(name = "car_id", nullable = false, updatable = false)},
             inverseJoinColumns = {
                     @JoinColumn(name = "owner_id", nullable = false, updatable = false)})
-    private Set<Owner> owners = new HashSet<>();
+    private Map<Owner, History> owners = new HashMap<>();
 }

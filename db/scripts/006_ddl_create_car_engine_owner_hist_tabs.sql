@@ -20,7 +20,7 @@ create table history_owner(
 create table history(
     id serial primary key,
     startAI timestamp,
-    car_id timestamp
+    endAt timestamp
 );
 
 ALTER TABLE auto_post
