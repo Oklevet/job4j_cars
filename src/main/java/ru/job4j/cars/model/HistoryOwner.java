@@ -6,31 +6,25 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "car")
+@Table(name = "history_owner")
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Car {
+public class HistoryOwner {
 
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "brand_id")
-    private Brand brand;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
 
     @ManyToOne
-    @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"))
-    private Engine engine;
-
-    @OneToMany(mappedBy = "car")
-    private Set<HistoryOwner> historyOwners;
+    @JoinColumn(name = "car_id")
+    private Car car;
 }
