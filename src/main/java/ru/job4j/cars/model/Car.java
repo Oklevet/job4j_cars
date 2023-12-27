@@ -6,8 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -32,5 +31,5 @@ public class Car {
     private Engine engine;
 
     @OneToMany(mappedBy = "car")
-    private Set<HistoryOwner> historyOwners;
+    private Set<HistoryOwner> historyOwners = new HashSet<>();
 }
