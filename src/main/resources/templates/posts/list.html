@@ -32,7 +32,7 @@
                                 <td><a th:text="${post.car.brand} + ${post.car.model}" th:href="@{/posts/{postId}(postId=${post.id})}"></a></td>
                                 <td>
                                     <div class="mb-3">
-                                        <img th:src="@{/files/{fileId}(fileId=*{fileId})}" class="w-100" alt="No image">
+                                        <img th:src="@{/files/{fileId}(fileId=*{post.file.id})}" class="w-100" alt="No image">
                                     </div>
                                 </td>
                                 <td th:text="${#temporals.format(post.created, 'HH:mm dd-MM-yyyy')}"></td>

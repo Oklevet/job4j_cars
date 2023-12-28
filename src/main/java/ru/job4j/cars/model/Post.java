@@ -47,5 +47,5 @@ public class Post {
     )
     private List<User> participates = new ArrayList<>();
 
-    private int fileId;
+    private File file;
 }

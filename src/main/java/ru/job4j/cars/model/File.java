@@ -6,22 +6,21 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "history")
+@Table(name = "file")
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class History {
+public class File {
 
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private LocalDateTime startAI;
+    private String name;
 
-    private LocalDateTime endAt;
+    private String path;
 }

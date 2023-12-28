@@ -1,5 +1,7 @@
 package ru.job4j.cars.repository;
 
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Repository;
 import ru.job4j.cars.model.Brand;
 import ru.job4j.cars.model.Post;
 
@@ -8,6 +10,8 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository
+@AllArgsConstructor
 public class HibernatePostRepository implements PostRepository {
 
     CrudRepository crudRepository;
@@ -44,7 +48,7 @@ public class HibernatePostRepository implements PostRepository {
     public Collection<Post> findAllByDay(LocalDate date) {
         return crudRepository.query("select distinct x from Post x JOIN FETCH x.car JOIN FETCH x.priceHistory "
                 + "JOIN FETCH x.priceHistory "
-                + "where x.user.id = :us_id and x.created >= :date and x.created < date + 1",
+                + "where date_trunc('DAY', x.created) = :date",
                 Post.class, Map.of("date", date));
     }
 
@@ -52,14 +56,14 @@ public class HibernatePostRepository implements PostRepository {
     public Collection<Post> findAllWithPhoto(int fileId) {
         return crudRepository.query("select distinct x from Post x JOIN FETCH x.car JOIN FETCH x.priceHistory "
                 + "JOIN FETCH x.priceHistory "
-                + "where x.user.id = :us_id and x.fileId = :fileId", Post.class, Map.of("fileId", fileId));
+                + "where x.fileId = :fileId", Post.class, Map.of("fileId", fileId));
     }
 
     @Override
     public Collection<Post> findAllByBrand(Brand brand) {
         return crudRepository.query("select distinct x from Post x JOIN FETCH x.car JOIN FETCH x.priceHistory "
                         + "JOIN FETCH x.priceHistory "
-                        + "where x.user.id = :us_id and x.brand = :brand",
+                        + "where x.brand = :brand",
                 Post.class, Map.of("brand", brand));
     }
 }
