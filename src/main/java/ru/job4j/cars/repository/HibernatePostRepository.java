@@ -48,7 +48,7 @@ public class HibernatePostRepository implements PostRepository {
     public Collection<Post> findAllByDay(LocalDate date) {
         return crudRepository.query("select distinct x from Post x JOIN FETCH x.car JOIN FETCH x.priceHistory "
                 + "JOIN FETCH x.priceHistory "
-                + "where date_trunc('DAY', x.created) = :date",
+                + "where x.created = :date",
                 Post.class, Map.of("date", date));
     }
 
