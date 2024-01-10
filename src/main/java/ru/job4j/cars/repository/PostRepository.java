@@ -19,7 +19,7 @@ public interface PostRepository {
 
     boolean update(Post post);
 
-    Collection<Post> findAllByDay(LocalDate date);
+    Collection<Post> findAllByLastDay();
 
     Collection<Post> findAllWithPhoto(int fileId);
 

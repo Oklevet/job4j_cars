@@ -6,6 +6,8 @@ import ru.job4j.cars.model.Brand;
 import ru.job4j.cars.model.Post;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
@@ -45,10 +47,11 @@ public class HibernatePostRepository implements PostRepository {
     }
 
     @Override
-    public Collection<Post> findAllByDay(LocalDate date) {
+    public Collection<Post> findAllByLastDay() {
+        LocalDateTime date = LocalDateTime.now().minus(1, ChronoUnit.DAYS);
         return crudRepository.query("select distinct x from Post x JOIN FETCH x.car JOIN FETCH x.priceHistory "
                 + "JOIN FETCH x.priceHistory "
-                + "where x.created = :date",
+                + "where x.created >= :date",
                 Post.class, Map.of("date", date));
     }
 
